@@ -14,4 +14,6 @@ public class CountryCodeUrlConnectionConfig {
         return Jsoup.connect(countryCodeUrl);
     }
 
+    //todo errorproperties
+
 }

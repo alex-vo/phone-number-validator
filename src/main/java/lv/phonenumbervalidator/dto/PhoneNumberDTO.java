@@ -1,16 +1,18 @@
 package lv.phonenumbervalidator.dto;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import lv.phonenumbervalidator.validation.PhoneNumber;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-@Data
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PhoneNumberDTO {
     @NotBlank(message = "phone number cannot be blank")
-    @PhoneNumber
+    @Pattern(regexp = "^(\\+|00)(\\d| )+", message = "phone number should start with + or 00 followed by 1 or more digits")
     String phoneNumber;
 }

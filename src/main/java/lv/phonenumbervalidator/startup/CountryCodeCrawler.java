@@ -55,7 +55,7 @@ public class CountryCodeCrawler {
                 .map(tds -> {
                     try {
                         String country = tds.get(0).text();
-                        String code = tds.get(1).select("a").text();
+                        String code = tds.get(1).select("a").text().replaceAll(" ", "");
                         if (StringUtils.isAnyBlank(country, code)) {
                             throw new RuntimeException(String.format("Unexpected empty value: country=%s, code=%s. Raw data: %s",
                                     country, code, tds));
