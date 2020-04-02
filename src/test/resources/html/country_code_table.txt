@@ -1,0 +1,39 @@
+<table class="wikitable sortable jquery-tablesorter">
+<thead><tr>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Country, Territory or Service
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Code
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Time Zone
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending"><a href="/wiki/Daylight_saving_time" title="Daylight saving time">DST</a>
+</th></tr></thead><tbody>
+<tr>
+<td>Afghanistan
+</td>
+<td align="right"><span data-sort-value="7004930000000000000♠" style="display:none"></span><a href="/wiki/%2B93" class="mw-redirect" title="+93">+93</a>
+</td>
+<td>UTC+04:30
+</td>
+<td>
+</td></tr>
+<tr>
+<td>Åland Islands
+</td>
+<td align="right"><span data-sort-value="7004358180000000000♠" style="display:none"></span><a href="/wiki/%2B358_18" class="mw-redirect" title="+358 18">+358 18</a>
+</td>
+<td>UTC+02:00
+</td>
+<td>UTC+03:00
+</td></tr>
+<tr>
+<td>Albania
+</td>
+<td align="right"><span data-sort-value="7004355000000000000♠" style="display:none"></span><a href="/wiki/%2B355" class="mw-redirect" title="+355">+355</a>
+</td>
+<td>UTC+01:00
+</td>
+<td>UTC+02:00
+</td></tr>
+<tr>
+</tbody><tfoot></tfoot></table>

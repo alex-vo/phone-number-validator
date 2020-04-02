@@ -1,8 +1,8 @@
 package lv.phonenumbervalidator.repository;
 
 import lv.phonenumbervalidator.entity.CountryCode;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -17,7 +17,7 @@ public class CountryCodeRepositoryTest {
     @Autowired
     CountryCodeRepository countryCodeRepository;
 
-    @BeforeEach
+    @Before
     public void setup() {
         countryCodeRepository.saveAll(List.of(
                 prepareCountryCode("Usa", "+1"),

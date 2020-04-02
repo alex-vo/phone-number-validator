@@ -1,0 +1,30 @@
+<table class="wikitable sortable jquery-tablesorter">
+<thead><tr>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Country, Territory or Service
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Code
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending">Time Zone
+</th>
+<th class="headerSort" tabindex="0" role="columnheader button" title="Sort ascending"><a href="/wiki/Daylight_saving_time" title="Daylight saving time">DST</a>
+</th></tr></thead><tbody>
+<tr>
+  <td>Afghanistan</td>
+  <td><a href="/wiki/%2B93">+93</a></td>
+  <td>UTC+04:30</td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td>UTC+04:30</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Latvia</td>
+  <td><a href="/wiki/%2B93">+371</a></td>
+  <td>UTC+03:00</td>
+  <td></td>
+</tr>
+
+</tbody><tfoot></tfoot></table>

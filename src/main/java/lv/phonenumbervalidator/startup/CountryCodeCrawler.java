@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CountryCodeCrawler {
 
-    private static final String COUNTRY_CODE_TABLE_HEADER_ID_SELECTOR = "Alphabetical_listing_by_country_or_region";
+    static final String COUNTRY_CODE_TABLE_HEADER_ID_SELECTOR = "Alphabetical_listing_by_country_or_region";
 
     private final Connection countryCodeUrlConnection;
     private final CountryCodeRepository countryCodeRepository;
