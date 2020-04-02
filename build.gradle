@@ -61,6 +61,8 @@ sourceSets {
 configurations {
     integrationImplementation.extendsFrom testImplementation
     unitImplementation.extendsFrom testImplementation
+    acceptanceImplementation.extendsFrom testImplementation
+    e2eImplementation.extendsFrom testImplementation
 }
 
 task testUnit(type: Test, group: 'verification') {
