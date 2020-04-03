@@ -1,3 +1,14 @@
+import org.apache.commons.lang3.SystemUtils
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.apache.commons:commons-lang3:3.10'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
@@ -26,6 +37,14 @@ dependencies {
     testImplementation 'com.h2database:h2:1.4.200'
     testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '2.0.7'
     testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '2.0.7'
+    testImplementation('org.seleniumhq.selenium:selenium-java:3.141.59') {
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-safari-driver'
+        exclude group: 'org.webbitserver', module: 'webbit'
+        exclude group: 'commons-codec', module: 'commons-codec'
+        exclude group: 'cglib', module: 'cglib-nodep'
+    }
 }
 
 sourceSets {
@@ -84,8 +103,23 @@ task testAcceptance(type: Test, group: 'verification') {
 }
 
 task testE2E(type: Test, group: 'verification') {
+    onlyIf {
+        project.hasProperty('withE2E')
+    }
+
     testClassesDirs = sourceSets.e2e.output.classesDirs
     classpath = sourceSets.e2e.runtimeClasspath
+
+    String driverPath
+    if (SystemUtils.IS_OS_WINDOWS) {
+        driverPath = 'src/test/resources/chrome/win/chromedriver.exe'
+    } else if (SystemUtils.IS_OS_MAC) {
+        driverPath = 'src/test/resources/chrome/mac/chromedriver'
+    } else {
+        driverPath = 'src/test/resources/chrome/linux/chromedriver'
+    }
+    systemProperty 'webdriver.chrome.driver', driverPath
+
     useJUnitPlatform()
 }
 
