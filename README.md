@@ -14,10 +14,10 @@ To run tests execute:
 ```
 ./gradlew test
 ```
-To run tests including end-to-end tests execute:
+To run tests including end-to-end UI test execute:
 ```
 ./gradlew test -PwithE2E=true
 ```  
-End-to-end tests have not been tested on Windows and MacOS machines, hence excluded by default.
+End-to-end UI test has not been tested on Windows and MacOS machines, hence excluded by default.
 
 After execution test reports are available under `build/reports/tests` 
