@@ -1,4 +1,5 @@
-##DISCLAIMER! 
+## DISCLAIMER!
+ 
 Application does not validate phone number length, because otherwise it would require maintaining possible length rules for each country.
 
 To run application on port 8080 execute:
