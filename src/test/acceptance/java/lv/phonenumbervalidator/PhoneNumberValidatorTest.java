@@ -1,7 +1,5 @@
 package lv.phonenumbervalidator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.phonenumbervalidator.dto.PhoneNumberDTO;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.junit.Test;
@@ -48,20 +46,11 @@ public class PhoneNumberValidatorTest {
 
     @Test
     public void shouldIdentifyLatvianNumber() throws Exception {
-        PhoneNumberDTO phoneNumberDTO = preparePhoneNumberDTO("+37122222222");
-
         mvc.perform(MockMvcRequestBuilders
-                .post("/api/v1/validatePhoneNumber")
-                .content(new ObjectMapper().writeValueAsString(phoneNumberDTO))
+                .get("/api/v1/phone-number/validate?rawNumber=+37122222222")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.country").value("Latvia"));
-    }
-
-    private PhoneNumberDTO preparePhoneNumberDTO(String phoneNumber) {
-        PhoneNumberDTO phoneNumberDTO = new PhoneNumberDTO();
-        phoneNumberDTO.setPhoneNumber(phoneNumber);
-        return phoneNumberDTO;
     }
 
 }

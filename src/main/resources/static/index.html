@@ -3,26 +3,23 @@
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
 </head>
 <body>
-<input id="phone-number-input" type="text" placeholder="phone number"/>
-<button id="validate-phone-number-button">validate</button>
-<br>
-<div id="error-message" style="color: red; display: none"></div>
-<div id="result" style="color: green"></div>
+<form>
+    <input id="phone-number-input" type="text" placeholder="phone number" required="required"/>
+    <input type="submit" value="validate" id="validate-phone-number-button" />
+    <br>
+    <div id="error-message" style="color: red; display: none"></div>
+    <div id="result" style="color: green"></div>
+</form>
 <script type="text/javascript">
     $(document).ready(function () {
         let phoneNumberInput = $("#phone-number-input");
-        let validatePhoneNumberButton = $("#validate-phone-number-button");
         let resultContainer = $("#result");
         let errorMessageContainer = $("#error-message");
 
         const submitValidationRequest = function () {
-            console.log(phoneNumberInput.val());
             $.ajax({
-                method: "POST",
-                url: "api/v1/validatePhoneNumber",
-                contentType: "application/json",
-                dataType: "json",
-                data: JSON.stringify({phoneNumber: phoneNumberInput.val()})
+                method: "GET",
+                url: "api/v1/phone-number/validate?rawNumber=" + phoneNumberInput.val().replace(/\+/g, "%2B")
             }).done(function (response) {
                 resultContainer.html(response.country);
                 resultContainer.show();
@@ -34,12 +31,8 @@
             });
         };
 
-        phoneNumberInput.on('keypress', function (e) {
-            if (e.which === 13) {
-                submitValidationRequest();
-            }
-        });
-        validatePhoneNumberButton.on("click", function () {
+        $("form").on("submit", function (e) {
+            e.preventDefault();
             submitValidationRequest();
         });
     });

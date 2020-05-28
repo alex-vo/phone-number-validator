@@ -7,6 +7,7 @@ import lv.phonenumbervalidator.repository.CountryCodeRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -52,26 +53,28 @@ public class CountryCodeCrawler {
                     return tr.select("td");
                 })
                 .filter(tds -> !tds.isEmpty())
-                .map(tds -> {
-                    try {
-                        String country = tds.get(0).text();
-                        String code = tds.get(1).select("a").text().replaceAll(" ", "");
-                        if (StringUtils.isAnyBlank(country, code)) {
-                            throw new RuntimeException(String.format("Unexpected empty value: country=%s, code=%s. Raw data: %s",
-                                    country, code, tds));
-                        }
-
-                        CountryCode countryCode = new CountryCode();
-                        countryCode.setCountry(country);
-                        countryCode.setCode(code);
-                        return countryCode;
-                    } catch (Throwable throwableWhileParsing) {
-                        log.debug(String.format("Failed to parse %s", tds), throwableWhileParsing);
-                        return null;
-                    }
-                })
+                .map(this::getCountryCodeFromTds)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    private CountryCode getCountryCodeFromTds(Elements tds) {
+        try {
+            String country = tds.get(0).text();
+            String code = tds.get(1).select("a").text().replace(" ", "");
+            if (StringUtils.isAnyBlank(country, code)) {
+                throw new RuntimeException(String.format("Unexpected empty value: country=%s, code=%s. Raw data: %s",
+                        country, code, tds));
+            }
+
+            CountryCode countryCode = new CountryCode();
+            countryCode.setCountry(country);
+            countryCode.setCode(code);
+            return countryCode;
+        } catch (Throwable throwableWhileParsing) {
+            log.error(String.format("Failed to parse %s", tds), throwableWhileParsing);
+            return null;
+        }
     }
 
 }
