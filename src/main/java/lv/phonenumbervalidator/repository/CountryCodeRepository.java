@@ -9,15 +9,13 @@ import java.util.List;
 
 public interface CountryCodeRepository extends JpaRepository<CountryCode, Long> {
 
-    @Query(value = "with max_length_sub_query as ( " +
-            "    select max(length(code)) as maxLength " +
-            "    from country_code " +
-            "    where :pPhoneNumber like code || '%' and :pPhoneNumber <> code " +
-            ") " +
-            "select cc.country " +
-            "from country_code cc " +
-            "join max_length_sub_query mlsq on mlsq.maxLength=length(cc.code) " +
-            "where :pPhoneNumber like cc.code || '%' and :pPhoneNumber <> cc.code", nativeQuery = true)
+    @Query(value = "select country " +
+            "from ( " +
+            "   select cc.country, rank() over (order by length(cc.code) desc) as rnk " +
+            "   from country_code cc " +
+            "   where :pPhoneNumber like cc.code || '%' and :pPhoneNumber <> cc.code " +
+            ") matching_countries " +
+            "where matching_countries.rnk = 1", nativeQuery = true)
     List<String> findCountryCodeForPhoneNumber(@Param("pPhoneNumber") String phoneNumber);
 
 }
